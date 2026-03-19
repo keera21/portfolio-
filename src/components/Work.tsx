@@ -5,35 +5,99 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "Solid Starters",
-    category: "Low-Code Platform",
-    tools: "Angular, Next.js, NestJS, MongoDB",
-    image: "/images/Solidx.png",
+    title: "Autonomous Rover (Ongoing)",
+    category: "Robotics Platform",
+    tools: "Arduino, ROS2, SLAM, LiDAR, Gazebo, RViz",
+    details: [
+      "Developing a 6-motor differential drive rover (3 motors per side) using Arduino and H-bridge motor drivers with Bluetooth-based remote control.",
+      "Designed a dual-motor linkage suspension mechanism enabling terrain adaptation, improving obstacle traversal capability.",
+      "Implemented custom motor control logic for forward, reverse, and turning with 100% directional control reliability during field testing.",
+      "Integrating a robotic arm for object manipulation, transforming the rover into a multi-purpose autonomous robotic platform.",
+      "Currently developing a ROS2-based autonomous navigation stack, integrating SLAM algorithms for real-time mapping and localization using LiDAR.",
+      "Simulating rover dynamics and navigation in Gazebo, with sensor visualization and debugging using RViz, achieving 90% navigation accuracy."
+    ],
+    image: "/images/rover.png",
   },
   {
-    title: "Radix",
-    category: "E-Commerce",
-    tools: "Angular, Next.js, NestJS, CMS",
-    image: "/images/radix.png",
+    title: "Autonomous Warehouse Delivery Robot",
+    category: "ROS2 & Nav2 Simulation",
+    tools: "ROS2, Nav2, EKF, Python, URDF",
+    details: [
+      "Designed and simulated a fully autonomous warehouse delivery robot using ROS 2 and Nav2 capable of continuous pickup–delivery cycles.",
+      "Built a custom differential drive robot (sam_bot) with LiDAR and IMU sensors using URDF/Xacro, achieving reliable navigation and obstacle avoidance.",
+      "Implemented sensor fusion using an Extended Kalman Filter (EKF) via the robot_localization package, reducing rotational drift by ~85%.",
+      "Diagnosed and resolved Gazebo physics instability (\"square tire effect\") by redesigning wheel collision geometry, improving turn stability by ~70%.",
+      "Tuned AMCL localization parameters, increasing navigation reliability from ~60% to over 95% successful delivery cycles.",
+      "Developed a Python automation manager using the Nav2 Simple Commander API to execute infinite autonomous delivery loops."
+    ],
+    image: "/images/warehouse.png",
   },
   {
-    title: "Bond Cancellation",
-    category: "Import-Export Automation",
-    tools: "Angular, Next.js, NestJS, Workflows",
-    image: "/images/bond.png",
+    title: "Sumo-Robo (Competition)",
+    category: "Hardware & Control",
+    tools: "High-Torque Motors, Strategic Control",
+    details: [
+      "Secured 1st Position in a university-level Sumo Robot Competition, demonstrating strong robotics and control skills.",
+      "Achieved a 5–0 winning margin, showcasing reliable performance and strategic dominance in all rounds.",
+      "Engineered a high-power Sumo Robot with 140 N pushing force, ensuring superior torque and traction against opponents."
+    ],
+    image: "/images/sumo.png",
   },
   {
-    title: "Sapphire",
-    category: "CRM Platform",
-    tools: "AngularJS, NestJS, PostgreSQL",
-    image: "/images/sapphire.png",
+    title: "Collision Avoidance Simulation",
+    category: "Webots Simulation",
+    tools: "Path Planning, Distance Sensing",
+    details: [
+      "Developed and tested a robot model in the Webots simulator with collision avoidance behavior.",
+      "Implemented distance sensing and basic path planning logic.",
+      "Tuned parameters for smooth navigation."
+    ],
+    image: "/images/webots.png",
   },
   {
-    title: "Mpro",
-    category: "Insurance Platform",
-    tools: "React.js, Node.js, Microservices",
-    image: "/images/Maxlife.png",
+    title: "Q-learning GridWorld Simulation",
+    category: "Reinforcement Learning",
+    tools: "Python, NumPy, Pygame, Q-learning",
+    details: [
+      "Created a Python-based GridWorld using NumPy and Pygame.",
+      "Implemented Q-learning for training autonomous agents.",
+      "Built save/load functionality for Q-table reuse."
+    ],
+    image: "/images/gridworld.png",
   },
+  {
+    title: "Handwritten Digit Recognition",
+    category: "Neural Networks",
+    tools: "TensorFlow, Keras, MNIST",
+    details: [
+      "Developed and trained a neural network using TensorFlow and Keras on the MNIST dataset to recognize handwritten digits with high accuracy.",
+      "Implemented custom testing using self-drawn digit images to evaluate model generalization and data preprocessing importance.",
+      "Strengthened understanding of neural networks and visual pattern recognition."
+    ],
+    image: "/images/digit.png",
+  },
+  {
+    title: "Sign Language Recognition System",
+    category: "Computer Vision",
+    tools: "CNN, OpenCV",
+    details: [
+      "Real-time webcam integration with live prediction overlay.",
+      "Trained a CNN on over 27,000 labeled ASL hand gestures.",
+      "Achieved over 90% accuracy on test data."
+    ],
+    image: "/images/sign_language.png",
+  },
+  {
+    title: "Automated Solar Tracking System",
+    category: "Embedded System",
+    tools: "Arduino, Servo Motors, LDR",
+    details: [
+      "Designed and built an Arduino-based solar tracker using two servo motors and LDR sensors.",
+      "Calibrated the system for accurate sun-tracking and optimized power generation.",
+      "Managed wiring, coding, and performance testing."
+    ],
+    image: "/images/solar.png",
+  }
 ];
 
 const Work = () => {
@@ -108,6 +172,11 @@ const Work = () => {
                         <p className="carousel-category">
                           {project.category}
                         </p>
+                        <ul className="carousel-description" style={{ marginTop: '10px', fontSize: '13px', lineHeight: '1.4', paddingLeft: '20px', textAlign: 'left', listStyle: 'disc' }}>
+                          {project.details.map((detail, idx) => (
+                            <li key={idx} style={{ marginBottom: '5px' }}>{detail}</li>
+                          ))}
+                        </ul>
                         <div className="carousel-tools">
                           <span className="tools-label">Tools & Features</span>
                           <p>{project.tools}</p>

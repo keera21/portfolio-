@@ -59,8 +59,9 @@ const WhatIDo = () => {
             </svg>
           </div>
           <div
-            className="what-content what-noTouch"
+            className="what-content what-noTouch what-content-active"
             ref={(el) => setRef(el, 0)}
+            style={{ width: '100%', height: '100%', minHeight: '100%', padding: '50px' }}
           >
             <div className="what-border1">
               <svg height="100%">
@@ -86,64 +87,30 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
 
-            <div className="what-content-in">
-              <h3>FRONTEND</h3>
-              <h4>Building Interactive UIs</h4>
-              <p>
-                Crafting performant, responsive interfaces with modern frameworks.
-                From SPAs to micro-frontends, I deliver pixel-perfect experiences.
+            <div className="what-content-in" style={{ opacity: 1, paddingRight: '20px' }}>
+              <h3 style={{ fontSize: '42px', marginBottom: '10px' }}>ROBOTICS & AI</h3>
+              <h4 style={{ fontSize: '18px', opacity: 0.6, marginBottom: '20px' }}>Autonomous Systems & Embedded Software</h4>
+              <p style={{ fontSize: '16px', lineHeight: '24px', letterSpacing: '0.5px' }}>
+                Developing control systems, AI models, and embedded software for physical platforms. From SLAM and computer vision algorithms down to programming microcontrollers and designing mechanical components with SolidWorks, I bridge the gap between complex software logic and physical hardware arrays.
               </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">React.js</div>
-                <div className="what-tags">Angular</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">Material UI</div>
-                <div className="what-tags">HTML5</div>
-                <div className="what-tags">CSS3</div>
+              <h5 style={{ fontSize: '14px', marginTop: '30px' }}>Skillset & tools</h5>
+              <div className="what-content-flex" style={{ gap: '10px', marginTop: '15px' }}>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>ROS2</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Nav2</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Gazebo</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>RViz</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>SLAM</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>OpenCV</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>TensorFlow</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Q-learning</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Python</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>C/C++</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Arduino</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Motor Control</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Sensor Integration</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>SolidWorks</div>
+                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>MATLAB</div>
               </div>
-              <div className="what-arrow"></div>
-            </div>
-          </div>
-          <div
-            className="what-content what-noTouch"
-            ref={(el) => setRef(el, 1)}
-          >
-            <div className="what-border1">
-              <svg height="100%">
-                <line
-                  x1="0"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
-            <div className="what-content-in">
-              <h3>BACKEND</h3>
-              <h4>Scalable Server Architecture</h4>
-              <p>
-                Designing robust APIs and microservices. From CMS platforms to
-                complex business logic, I build backends that scale.
-              </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">NestJS</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">MongoDB</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">REST APIs</div>
-                <div className="what-tags">Microservices</div>
-                <div className="what-tags">Python</div>
-              </div>
-              <div className="what-arrow"></div>
             </div>
           </div>
         </div>

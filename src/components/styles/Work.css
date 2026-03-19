@@ -42,16 +42,20 @@
 
 .carousel-slide {
   min-width: 100%;
+  max-width: 100%;
+  width: 100%;
   flex-shrink: 0;
   box-sizing: border-box;
   padding: 50px 0;
+  display: flex;
 }
 
 .carousel-content {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 60px;
   width: 100%;
+  min-width: 0;
 }
 
 .carousel-info {
