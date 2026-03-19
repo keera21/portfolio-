@@ -18,7 +18,7 @@ const Career = () => {
                 <h4>Logistics Coordinator</h4>
                 <h5>NASA Space Apps</h5>
               </div>
-              <h3>OCT '25</h3>
+              <h3 style={{ whiteSpace: "nowrap" }}>OCT '2025</h3>
             </div>
             <p>
               Served as Logistics Coordinator for NASA’s Space Apps Challenge. 
@@ -31,7 +31,7 @@ const Career = () => {
                 <h4>Community Volunteer</h4>
                 <h5>Alkhidmat Foundation</h5>
               </div>
-              <h3>DEC '25</h3>
+              <h3 style={{ whiteSpace: "nowrap" }}>DEC '2025</h3>
             </div>
             <p>
               Participated in a community service program focused on social welfare initiatives.
@@ -44,7 +44,7 @@ const Career = () => {
                 <h4>Volunteer</h4>
                 <h5>Youth Nexus</h5>
               </div>
-              <h3>AUG '25</h3>
+              <h3 style={{ whiteSpace: "nowrap" }}>AUG '2025</h3>
             </div>
             <p>
               Participated in a large-scale sustainability initiative. Engaged the local community in discussions on climate action, planted trees, and cleaned neglected spaces.
