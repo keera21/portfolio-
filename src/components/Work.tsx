@@ -45,11 +45,14 @@ const projects: Project[] = [
   {
     title: "Sumo-Robo (Competition)",
     category: "Hardware & Control",
-    tools: "High-Torque Motors, Strategic Control",
+    tools: "Robotics Control Logic · Embedded Systems Integration · Arduino Programming · Robotics Simulation",
     details: [
-      "Secured 1st Position in a university-level Sumo Robot Competition, demonstrating strong robotics and control skills.",
-      "Achieved a 5–0 winning margin, showcasing reliable performance and strategic dominance in all rounds.",
-      "Engineered a high-power Sumo Robot with 140 N pushing force, ensuring superior torque and traction against opponents."
+      "Designed and developed a competitive autonomous sumo robot focusing on mechanical robustness, electrical design, and embedded control.",
+      "Designed a custom 1 mm thick metal chassis to maximize durability, traction, and impact resistance during matches.",
+      "Integrated 4 high-torque Henkwell DC motors (142 RPM) delivering ~30 N force each for aggressive pushing performance.",
+      "Developed the complete electrical schematic using Proteus, including Arduino control, L298N motor driver, and Bluetooth communication.",
+      "Powered the system using a 6S Li-Po battery for high current delivery, and implemented wireless control via Bluetooth for real-time testing.",
+      "🏆 Achievement: Winner of Sumo Robot Competition (5–0 margin) at the Mechatronics Department, Mehran University of Engineering & Technology."
     ],
     image: "/images/sumo.png",
   },
