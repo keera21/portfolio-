@@ -54,6 +54,20 @@ const projects: Project[] = [
     image: "/images/sumo.png",
   },
   {
+    title: "Automated Solar Panel System",
+    category: "Associated with Mehran University of Engineering and Technology",
+    tools: "Motor Control · Circuit Design & Wiring · Renewable Energy Concepts · Embedded Systems Integration",
+    details: [
+      "This was a group project where I took full responsibility for all the electronics aspects, including wiring, programming the Arduino, calibrating the sensors, and debugging the entire system.",
+      "Using two LDR sensors and servo motors, I developed the automated tracking mechanism that adjusts the solar panel’s position to follow the sun and improve energy collection.",
+      "An Arduino Uno microcontroller is used as the brain of the system. It reads analog values from the LDRs and processes the data to control the servos accordingly. A 9V battery powers the Arduino, while a 12V, 10-watt solar panel is used to simulate real solar energy collection.",
+      "Calibration of the sensors and motors was carefully handled to ensure precise movement and responsiveness.",
+      "This system increases the efficiency of solar energy collection by ensuring the panel is always optimally aligned with the sun, especially useful for remote or off-grid applications.",
+      "The project also emphasizes low-cost automation, easy integration, and practical application in renewable energy solutions."
+    ],
+    image: "/images/solar.png",
+  },
+  {
     title: "Collision Avoidance Simulation",
     category: "Webots Simulation",
     tools: "Path Planning, Distance Sensing",
@@ -96,17 +110,6 @@ const projects: Project[] = [
       "Achieved over 90% accuracy on test data."
     ],
     image: "/images/sign_language.png",
-  },
-  {
-    title: "Automated Solar Tracking System",
-    category: "Embedded System",
-    tools: "Arduino, Servo Motors, LDR",
-    details: [
-      "Designed and built an Arduino-based solar tracker using two servo motors and LDR sensors.",
-      "Calibrated the system for accurate sun-tracking and optimized power generation.",
-      "Managed wiring, coding, and performance testing."
-    ],
-    image: "/images/solar.png",
   }
 ];
 
