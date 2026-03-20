@@ -3,7 +3,16 @@ import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
-const projects = [
+type Project = {
+  title: string;
+  category: string;
+  tools: string;
+  details: string[];
+  image: string;
+  youtubeId?: string;
+};
+
+const projects: Project[] = [
   {
     title: "Autonomous Rover (Ongoing)",
     category: "Robotics Platform",
@@ -31,6 +40,7 @@ const projects = [
       "Developed a Python automation manager using the Nav2 Simple Commander API to execute infinite autonomous delivery loops."
     ],
     image: "/images/warehouse.png",
+    youtubeId: "BqmDK1Tme38",
   },
   {
     title: "Sumo-Robo (Competition)",
@@ -181,10 +191,33 @@ const Work = () => {
                           <span className="tools-label">Tools & Features</span>
                           <p>{project.tools}</p>
                         </div>
+                        <a 
+                          href="https://www.linkedin.com/in/bashaar-ahmed-37573ab2/details/projects/" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="linkedin-project-link"
+                          style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', marginTop: '15px', color: '#fff', fontSize: '15px', textDecoration: 'none', borderBottom: '1px solid #fff', paddingBottom: '2px' }}
+                          data-cursor="disable"
+                        >
+                          View full overview on LinkedIn <MdArrowForward />
+                        </a>
                       </div>
                     </div>
                     <div className="carousel-image-wrapper">
-                      <WorkImage image={project.image} alt={project.title} />
+                      {project.youtubeId ? (
+                        <iframe 
+                          width="100%" 
+                          height="100%" 
+                          src={`https://www.youtube.com/embed/${project.youtubeId}`} 
+                          title={`${project.title} Video`} 
+                          frameBorder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                          allowFullScreen
+                          style={{ borderRadius: '10px' }}
+                        ></iframe>
+                      ) : (
+                        <WorkImage image={project.image} alt={project.title} />
+                      )}
                     </div>
                   </div>
                 </div>
