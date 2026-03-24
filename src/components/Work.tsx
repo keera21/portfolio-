@@ -85,15 +85,18 @@ const projects: Project[] = [
   },
 
   {
-    title: "Handwritten Digit Recognition",
+    title: "Handwritten Digit Recognition with Neural Networks",
     category: "Neural Networks",
-    tools: "TensorFlow, Keras, MNIST",
+    tools: "Neural Networks · Data Preprocessing · Model Training & Evaluation · TensorFlow · Keras · MNIST Dataset",
     details: [
-      "Developed and trained a neural network using TensorFlow and Keras on the MNIST dataset to recognize handwritten digits with high accuracy.",
-      "Implemented custom testing using self-drawn digit images to evaluate model generalization and data preprocessing importance.",
-      "Strengthened understanding of neural networks and visual pattern recognition."
+      "In this project, I trained a model using the MNIST dataset, which contains thousands of images of handwritten digits (0–9).",
+      "The model learns to recognize patterns in the images and predict the digit shown — just like how we recognize handwriting!",
+      "Implemented a robust data preprocessing pipeline, including image normalization, reshaping, and augmentation techniques to improve model generalization.",
+      "Designed a deep neural network architecture with multiple hidden layers, utilizing dropout for regularization and softmax activation for multi-class probability output.",
+      "Developed a custom prediction script allowing the model to be tested against new, real-world user-drawn digits to validate its practical accuracy.",
+      "Model achieved 93% accuracy in recognizing and classifying handwritten digit images."
     ],
-    image: "/images/digit.png",
+    image: "/images/handwriting_demo.jpg",
   },
   {
     title: "Sign Language Recognition System",
