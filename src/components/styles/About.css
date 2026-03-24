@@ -29,6 +29,7 @@
   line-height: 1.6;
   letter-spacing: 0.5px;
   color: #d1d5db;
+  text-align: justify;
 }
 
 @media only screen and (min-width: 600px) {
