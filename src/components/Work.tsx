@@ -71,15 +71,17 @@ const projects: Project[] = [
     image: "/images/solar.png",
   },
   {
-    title: "Collision Avoidance Simulation",
-    category: "Webots Simulation",
-    tools: "Path Planning, Distance Sensing",
+    title: "Robotic Arm Simulation, Automation & Motion Planning",
+    category: "ROS 2 | Robotic Arm Simulation, Automation & Motion Planning | Mar 2026 - Present",
+    tools: "Robot Operating System (ROS) · Kinematics · Robotics Control Logic · Robotics Simulation",
     details: [
-      "Developed and tested a robot model in the Webots simulator with collision avoidance behavior.",
-      "Implemented distance sensing and basic path planning logic.",
-      "Tuned parameters for smooth navigation."
+      "Worked with the UR5 robotic arm, successfully simulating the robot in Gazebo for real-time physics-based simulation.",
+      "Utilized RViz for complex point-to-point path planning, trajectory generation, and executing the robot’s precise movements.",
+      "Implemented Python-based automation scripts to control the robotic arm, assigning specific movement patterns.",
+      "Developed an automated workflow allowing the robotic arm to perform predefined, repetitive, and precise industrial operations without manual intervention."
     ],
-    image: "/images/webots.png",
+    image: "",
+    youtubeId: "C-k1JtXVgD0",
   },
   {
     title: "Q-learning GridWorld Simulation",
