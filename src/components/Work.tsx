@@ -83,17 +83,7 @@ const projects: Project[] = [
     image: "",
     youtubeId: "C-k1JtXVgD0",
   },
-  {
-    title: "Q-learning GridWorld Simulation",
-    category: "Reinforcement Learning",
-    tools: "Python, NumPy, Pygame, Q-learning",
-    details: [
-      "Created a Python-based GridWorld using NumPy and Pygame.",
-      "Implemented Q-learning for training autonomous agents.",
-      "Built save/load functionality for Q-table reuse."
-    ],
-    image: "/images/gridworld.png",
-  },
+
   {
     title: "Handwritten Digit Recognition",
     category: "Neural Networks",
