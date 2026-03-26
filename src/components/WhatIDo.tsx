@@ -1,12 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const WhatIDo = () => {
   const containerRef = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const setRef = (el: HTMLDivElement | null, index: number) => {
     containerRef.current[index] = el;
   };
+
+  const handleArrowClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (scrollRef.current) {
+      if (isScrolled) {
+        scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        setIsScrolled(false);
+      } else {
+        scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+        setIsScrolled(true);
+      }
+    }
+  };
+
   useEffect(() => {
     if (ScrollTrigger.isTouch) {
       containerRef.current.forEach((container) => {
@@ -86,8 +103,9 @@ const WhatIDo = () => {
               </svg>
             </div>
             <div className="what-corner"></div>
+            <div className={`what-arrow ${isScrolled ? "scrolled" : ""}`} onClick={handleArrowClick}></div>
 
-            <div className="what-content-in" style={{ opacity: 1, paddingRight: '20px' }}>
+            <div className="what-content-in" ref={scrollRef} style={{ opacity: 1, paddingRight: '20px' }}>
               <h3 style={{ fontSize: '42px', marginBottom: '10px' }}>ROBOTICS & AI</h3>
               <h4 style={{ fontSize: '18px', opacity: 0.6, marginBottom: '20px' }}>Autonomous Systems & Embedded Software</h4>
               <p style={{ fontSize: '16px', lineHeight: '24px', letterSpacing: '0.5px' }}>
