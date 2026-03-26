@@ -206,7 +206,23 @@
 }
 .what-content-in {
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom minimal scrollbar for the skills section */
+.what-content-in::-webkit-scrollbar {
+  width: 4px;
+}
+.what-content-in::-webkit-scrollbar-track {
+  background: transparent;
+}
+.what-content-in::-webkit-scrollbar-thumb {
+  background: var(--accentColor, rgba(20, 184, 166, 0.5));
+  border-radius: 10px;
+}
+.what-content-in::-webkit-scrollbar-thumb:hover {
+  background: var(--accentColor, rgba(20, 184, 166, 0.8));
 }
 .what-content-in h5 {
   font-weight: 300;
