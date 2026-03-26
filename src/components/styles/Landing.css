@@ -227,7 +227,7 @@
   letter-spacing: 1px;
   margin: 5px 0;
   white-space: nowrap;
-  text-transform: lowercase;
+  text-transform: uppercase;
 }
 
 .landing-robotics {
@@ -235,7 +235,7 @@
   font-weight: 800;
   letter-spacing: 2px;
   color: #f8f9fa;
-  font-size: 26px;
+  font-size: 22px;
   margin: 0;
   white-space: nowrap;
 }
@@ -267,7 +267,7 @@
   }
 
   .landing-robotics {
-    font-size: 28px;
+    font-size: 24px;
   }
 }
 
@@ -294,7 +294,7 @@
   }
 
   .landing-robotics {
-    font-size: 40px;
+    font-size: 36px;
   }
 }
 
@@ -367,6 +367,6 @@
   }
 
   .landing-robotics {
-    font-size: 55px;
+    font-size: 48px;
   }
 }

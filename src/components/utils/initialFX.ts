@@ -13,7 +13,7 @@ export function initialFX() {
   });
 
   var landingText = new SplitText(
-    [".landing-specializing", ".landing-robotics", ".landing-intro h2", ".landing-intro h1"],
+    [".landing-specializing", ".landing-intro h2", ".landing-intro h1"],
     {
       type: "chars,lines",
       linesClass: "split-line",
@@ -30,6 +30,21 @@ export function initialFX() {
       y: 0,
       stagger: 0.025,
       delay: 0.3,
+    }
+  );
+
+  var roboticsText = new SplitText(".landing-robotics", { type: "chars" });
+  gsap.fromTo(
+    roboticsText.chars,
+    { opacity: 0, y: 50, filter: "blur(10px)" },
+    {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 1.2,
+      stagger: 0.05,
+      ease: "power4.out",
+      delay: 0.5,
     }
   );
 
