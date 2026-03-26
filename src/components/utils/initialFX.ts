@@ -13,7 +13,7 @@ export function initialFX() {
   });
 
   var landingText = new SplitText(
-    [".landing-mechatronics", ".landing-specializing", ".landing-robotics", ".landing-intro h2", ".landing-intro h1"],
+    [".landing-specializing", ".landing-robotics", ".landing-intro h2", ".landing-intro h1"],
     {
       type: "chars,lines",
       linesClass: "split-line",
@@ -29,6 +29,19 @@ export function initialFX() {
       ease: "power3.inOut",
       y: 0,
       stagger: 0.025,
+      delay: 0.3,
+    }
+  );
+
+  gsap.fromTo(
+    ".landing-mechatronics",
+    { opacity: 0, y: 80, filter: "blur(5px)" },
+    {
+      opacity: 1,
+      duration: 1.2,
+      filter: "blur(0px)",
+      ease: "power3.inOut",
+      y: 0,
       delay: 0.3,
     }
   );
