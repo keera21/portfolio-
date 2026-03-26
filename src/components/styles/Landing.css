@@ -231,6 +231,17 @@
   text-transform: uppercase;
 }
 
+.landing-specializing::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #14b8a6, #5eead4);
+  margin-bottom: 12px;
+  margin-top: 15px;
+  border-radius: 2px;
+}
+
 .landing-robotics {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 800;
