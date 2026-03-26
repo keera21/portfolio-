@@ -13,13 +13,9 @@ const Landing = ({ children }: PropsWithChildren) => {
             </h1>
           </div>
           <div className="landing-info">
-            <h3>Mechatronics Engineer</h3>
-            <h2 className="landing-info-h2">
-              <div style={{ whiteSpace: "nowrap" }}>Specializing&nbsp;in</div>
-            </h2>
-            <h2>
-              <div className="landing-h2-info" style={{ whiteSpace: "nowrap" }}>Autonomous&nbsp;Robotics</div>
-            </h2>
+            <h3 className="landing-mechatronics">Mechatronics Engineer</h3>
+            <h4 className="landing-specializing">specializing in</h4>
+            <h2 className="landing-robotics">AUTONOMOUS ROBOTICS</h2>
           </div>
         </div>
         {children}
