@@ -207,8 +207,9 @@
 
 .landing-mechatronics {
   font-family: "Space Grotesk", sans-serif;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   background: linear-gradient(90deg, #14b8a6, #5eead4);
   -webkit-background-clip: text;
   background-clip: text;
