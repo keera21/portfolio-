@@ -77,22 +77,4 @@
   }
 }
 
-.robot-3d-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  pointer-events: none; /* Let hovers trigger background 2D canvas lasers */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.robot-3d-container canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-}
