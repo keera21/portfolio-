@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLoading } from "../context/LoadingProvider";
+import { setAllTimeline } from "./utils/GsapScroll";
 import "./styles/LidarCanvas.css";
 
 const LidarCanvas = () => {
@@ -632,6 +634,14 @@ const LidarCanvas = () => {
       canvas.removeEventListener("mouseleave", onMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAllTimeline();
+      ScrollTrigger.refresh();
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
