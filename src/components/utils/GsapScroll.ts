@@ -229,8 +229,8 @@ export function setAllTimeline() {
     .to(
       ".lidar-container",
       {
-        opacity: 0,
-        pointerEvents: "none",
+        filter: "blur(15px)",
+        opacity: 0.12,
         duration: 0.5,
       },
       0
