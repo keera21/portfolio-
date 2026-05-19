@@ -94,7 +94,7 @@ export function setCharTimeline(
         object.material.transparent = true;
         object.material.opacity = 0;
         object.material.emissive.set("#B0F5EA");
-        
+
         const emissiveTl = gsap.timeline({ repeat: -1, repeatRefresh: true }).to(object.material, {
           emissiveIntensity: () => intensity * 8,
           duration: () => Math.random() * 0.6,
@@ -158,12 +158,12 @@ export function setCharTimeline(
 
       if (monitor) {
         tl2.to(monitor.material, { opacity: 1, duration: 0.8, delay: 3.2 }, 0)
-           .fromTo(
-             monitor.position,
-             { y: -10, z: 2 },
-             { y: 0, z: 0, delay: 1.5, duration: 3 },
-             0
-           );
+          .fromTo(
+            monitor.position,
+            { y: -10, z: 2 },
+            { y: 0, z: 0, delay: 1.5, duration: 3 },
+            0
+          );
       }
 
       if (screenLight) {
@@ -188,8 +188,8 @@ export function setAllTimeline() {
   const careerTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".career-section",
-      start: "top 95%",
-      end: "top 35%",
+      start: "top 30%",
+      end: "100% center",
       scrub: true,
       invalidateOnRefresh: true,
     },
@@ -229,8 +229,8 @@ export function setAllTimeline() {
     .to(
       ".lidar-container",
       {
-        filter: "blur(15px)",
-        opacity: 0.12,
+        opacity: 0,
+        pointerEvents: "none",
         duration: 0.5,
       },
       0
