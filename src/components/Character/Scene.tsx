@@ -24,6 +24,23 @@ const Scene = () => {
   const [character, setChar] = useState<THREE.Object3D | null>(null);
 
   useEffect(() => {
+    if (isLowPerformance) {
+      // Fast-forward loading progress to 100% since 3D character loading is bypassed
+      let percent = 0;
+      const interval = setInterval(() => {
+        percent += 5;
+        if (percent >= 100) {
+          setLoading(100);
+          clearInterval(interval);
+        } else {
+          setLoading(percent);
+        }
+      }, 15);
+      return () => clearInterval(interval);
+    }
+  }, [isLowPerformance, setLoading]);
+
+  useEffect(() => {
     if (isLowPerformance) return;
 
     if (canvasDiv.current) {
