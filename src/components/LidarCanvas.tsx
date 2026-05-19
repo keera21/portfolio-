@@ -69,7 +69,7 @@ const LidarCanvas = () => {
 
     const isDesktop = window.innerWidth > 1024;
     const roverGroup = new THREE.Group();
-    roverGroup.position.set(isDesktop ? 1.35 : 0, -0.45, 0);
+    roverGroup.position.set(isDesktop ? 2.05 : 0, -0.45, 0);
     scene.add(roverGroup);
 
     // Chassis Box
@@ -297,7 +297,7 @@ const LidarCanvas = () => {
       let targetY = 0;
 
       if (mouse.active) {
-        const cX = rect.left + width * (window.innerWidth > 1024 ? 0.62 : 0.5);
+        const cX = rect.left + width * (window.innerWidth > 1024 ? 0.72 : 0.5);
         const cY = rect.top + height / 2;
         targetX = (mouse.x - cX) / (width / 2);
         targetY = -(mouse.y - cY) / (height / 2);
@@ -509,7 +509,7 @@ const LidarCanvas = () => {
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      const centerX = width * (window.innerWidth > 1024 ? 0.62 : 0.5);
+      const centerX = width * (window.innerWidth > 1024 ? 0.72 : 0.5);
       const centerY = height / 2;
       const radarRadius = Math.min(width, height) * 0.38;
 
