@@ -73,7 +73,7 @@ export const PerformanceProvider = ({ children }: PropsWithChildren) => {
           fpsMeasurements.current.reduce((a, b) => a + b, 0) /
           fpsMeasurements.current.length;
 
-        if (avgFps < 42) {
+        if (avgFps < 48) {
           setIsLowPerformanceState(true);
           setHasAutoDetected(true);
           setShowToast(true);
@@ -105,6 +105,19 @@ export const PerformanceProvider = ({ children }: PropsWithChildren) => {
       }}
     >
       {children}
+      
+      {/* Floating Performance Mode HUD Switcher */}
+      <div 
+        className="perf-control-floating"
+        onClick={() => setLowPerformance(!isLowPerformance)}
+        title="Toggle Performance Mode"
+      >
+        <span className={`perf-control-indicator ${isLowPerformance ? "active" : ""}`}></span>
+        <span className="perf-control-text">
+          {isLowPerformance ? "PERF: ECO MODE" : "PERF: HIGH-3D"}
+        </span>
+      </div>
+
       {showToast && (
         <div className="perf-toast animate-in">
           <div className="perf-toast-body">

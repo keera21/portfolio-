@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLoading } from "../context/LoadingProvider";
+import { usePerformance } from "../context/PerformanceProvider";
 import { setAllTimeline } from "./utils/GsapScroll";
 import "./styles/LidarCanvas.css";
 
@@ -9,7 +10,25 @@ const LidarCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const webglRef = useRef<HTMLDivElement | null>(null);
   const mouseRef = useRef({ x: -1000, y: -1000, active: false });
+  const isVisibleRef = useRef(true);
   const { setLoading } = useLoading();
+  const { isLowPerformance } = usePerformance();
+
+  // Intersection Observer to pause rendering when canvas scrolls off screen
+  useEffect(() => {
+    const container = webglRef.current?.parentElement;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   // Fast loading sequence
   useEffect(() => {
@@ -42,9 +61,12 @@ const LidarCanvas = () => {
     camera.position.set(5.5, 4.0, 10.5);
     camera.lookAt(0, 0.2, 0);
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: !isLowPerformance
+    });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isLowPerformance ? 1 : Math.min(window.devicePixelRatio, 1.5));
     container.appendChild(renderer.domElement);
 
     // 2. Glowing wireframe cyber materials
@@ -68,6 +90,11 @@ const LidarCanvas = () => {
       transparent: true,
       opacity: 0.9
     });
+
+    const wheelSegments = isLowPerformance ? 8 : 12;
+    const cylinderSegments = isLowPerformance ? 4 : 8;
+    const sphereSegments = isLowPerformance ? 4 : 8;
+    const ringSegments = isLowPerformance ? 24 : 40;
 
     const isDesktop = window.innerWidth > 1024;
     const roverGroup = new THREE.Group();
@@ -94,7 +121,7 @@ const LidarCanvas = () => {
     screenMesh.rotation.z = -0.15;
     chassisMesh.add(screenMesh);
 
-    const antennaGeo = new THREE.CylinderGeometry(0.015, 0.015, 0.8, 4);
+    const antennaGeo = new THREE.CylinderGeometry(0.015, 0.015, 0.8, cylinderSegments);
     const antennaMesh = new THREE.Mesh(antennaGeo, mainMaterial);
     antennaMesh.position.set(-0.8, 0.6, -0.3);
     chassisMesh.add(antennaMesh);
@@ -110,8 +137,8 @@ const LidarCanvas = () => {
       { x: -0.75, y: 0.15, z: -0.68, right: false }
     ];
 
-    const wheelGeo = new THREE.CylinderGeometry(0.38, 0.38, 0.28, 12);
-    const axleGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.3, 6);
+    const wheelGeo = new THREE.CylinderGeometry(0.38, 0.38, 0.28, wheelSegments);
+    const axleGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.3, cylinderSegments);
 
     wheelPositions.forEach((pos) => {
       // Create axle / suspension arm
@@ -130,18 +157,18 @@ const LidarCanvas = () => {
     });
 
     // LiDAR Sensor Dome
-    const lidarBaseGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.2, 8);
+    const lidarBaseGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.2, cylinderSegments);
     const lidarBase = new THREE.Mesh(lidarBaseGeo, mainMaterial);
     lidarBase.position.set(0.5, 0.38, 0);
     chassisMesh.add(lidarBase);
 
-    const lidarScannerGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.22, 10);
+    const lidarScannerGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.22, cylinderSegments);
     const lidarScanner = new THREE.Mesh(lidarScannerGeo, highlightMaterial);
     lidarScanner.position.y = 0.2;
     lidarBase.add(lidarScanner);
 
     // Dynamic Scanning beam Fan shape (flat horizontal laser slice)
-    const beamGeo = new THREE.CylinderGeometry(0, 3.2, 0.05, 12, 1, true, 0, Math.PI * 0.35);
+    const beamGeo = new THREE.CylinderGeometry(0, 3.2, 0.05, wheelSegments, 1, true, 0, Math.PI * 0.35);
     const beamMaterial = new THREE.MeshBasicMaterial({
       color: 0x5eead4,
       wireframe: true,
@@ -160,7 +187,7 @@ const LidarCanvas = () => {
     chassisMesh.add(armBaseRotationGroup);
 
     // Shoulder sphere
-    const shoulderJointGeo = new THREE.SphereGeometry(0.2, 8, 8);
+    const shoulderJointGeo = new THREE.SphereGeometry(0.2, sphereSegments, sphereSegments);
     const shoulderJoint = new THREE.Mesh(shoulderJointGeo, mainMaterial);
     armBaseRotationGroup.add(shoulderJoint);
 
@@ -169,13 +196,13 @@ const LidarCanvas = () => {
     shoulderJoint.add(shoulderPitchGroup);
 
     // Upper arm link
-    const upperArmGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.9, 8);
+    const upperArmGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.9, cylinderSegments);
     const upperArm = new THREE.Mesh(upperArmGeo, mainMaterial);
     upperArm.position.y = 0.45;
     shoulderPitchGroup.add(upperArm);
 
     // Elbow sphere
-    const elbowJointGeo = new THREE.SphereGeometry(0.15, 8, 8);
+    const elbowJointGeo = new THREE.SphereGeometry(0.15, sphereSegments, sphereSegments);
     const elbowJoint = new THREE.Mesh(elbowJointGeo, highlightMaterial);
     elbowJoint.position.y = 0.45;
     upperArm.add(elbowJoint);
@@ -185,13 +212,13 @@ const LidarCanvas = () => {
     elbowJoint.add(elbowPitchGroup);
 
     // Forearm link
-    const forearmGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.75, 8);
+    const forearmGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.75, cylinderSegments);
     const forearm = new THREE.Mesh(forearmGeo, mainMaterial);
     forearm.position.y = 0.38;
     elbowPitchGroup.add(forearm);
 
     // Wrist sphere
-    const wristJointGeo = new THREE.SphereGeometry(0.1, 8, 8);
+    const wristJointGeo = new THREE.SphereGeometry(0.1, sphereSegments, sphereSegments);
     const wristJoint = new THREE.Mesh(wristJointGeo, mainMaterial);
     wristJoint.position.y = 0.38;
     forearm.add(wristJoint);
@@ -201,7 +228,7 @@ const LidarCanvas = () => {
     wristJoint.add(wristPitchGroup);
 
     // Claw Gripper mount
-    const mountGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.1, 8);
+    const mountGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.1, cylinderSegments);
     const mount = new THREE.Mesh(mountGeo, mainMaterial);
     mount.position.y = 0.05;
     wristPitchGroup.add(mount);
@@ -218,9 +245,9 @@ const LidarCanvas = () => {
 
     // Ground Schematic Blueprint Circles
     const blueprints: THREE.Mesh[] = [];
-    const ring1Geo = new THREE.RingGeometry(1.2, 1.23, 40);
-    const ring2Geo = new THREE.RingGeometry(1.8, 1.84, 40);
-    const ring3Geo = new THREE.RingGeometry(2.5, 2.53, 40);
+    const ring1Geo = new THREE.RingGeometry(1.2, 1.23, ringSegments);
+    const ring2Geo = new THREE.RingGeometry(1.8, 1.84, ringSegments);
+    const ring3Geo = new THREE.RingGeometry(2.5, 2.53, ringSegments);
 
     const ringMaterial = new THREE.MeshBasicMaterial({
       color: 0x5eead4,
@@ -276,6 +303,7 @@ const LidarCanvas = () => {
     // Render and animation loop
     const animate3D = () => {
       animationFrameId = requestAnimationFrame(animate3D);
+      if (!isVisibleRef.current) return;
       time += 0.01;
 
       // Rotate ground circles in opposing directions
@@ -404,7 +432,7 @@ const LidarCanvas = () => {
         container.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [isLowPerformance]);
 
   // 2D LiDAR canvas (SLAM sweeping networks)
   useEffect(() => {
@@ -418,9 +446,9 @@ const LidarCanvas = () => {
     let height = 0;
 
     const particles: Particle[] = [];
-    const particleCount = 75;
-    const connectionDistance = 120;
-    const mouseScanRadius = 185;
+    const particleCount = isLowPerformance ? 20 : 55;
+    const connectionDistance = isLowPerformance ? 80 : 120;
+    const mouseScanRadius = isLowPerformance ? 120 : 185;
     let sweepAngle = 0;
 
     class Particle {
@@ -509,6 +537,8 @@ const LidarCanvas = () => {
     canvas.addEventListener("mouseleave", onMouseLeave);
 
     const animate = () => {
+      animationFrameId = requestAnimationFrame(animate);
+      if (!isVisibleRef.current) return;
       ctx.clearRect(0, 0, width, height);
 
       const centerX = width * (window.innerWidth > 1024 ? 0.77 : 0.5);
@@ -568,16 +598,18 @@ const LidarCanvas = () => {
         p.draw();
       });
 
-      // Render SLAM interconnecting mesh networks
+      // Render SLAM interconnecting mesh networks (optimized with squared-distance pre-check)
+      const limitSq = connectionDistance * connectionDistance;
       for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
         for (let j = i + 1; j < particles.length; j++) {
-          const p1 = particles[i];
           const p2 = particles[j];
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < connectionDistance) {
+          if (distSq < limitSq) {
+            const dist = Math.sqrt(distSq);
             const alpha = (1 - dist / connectionDistance) * 0.12;
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
@@ -589,7 +621,7 @@ const LidarCanvas = () => {
         }
       }
 
-      // Render Active Laser Telemetry from Mouse cursor
+      // Render Active Laser Telemetry from Mouse cursor (optimized with squared-distance pre-check)
       const mouse = mouseRef.current;
       if (mouse.active) {
         ctx.beginPath();
@@ -603,12 +635,14 @@ const LidarCanvas = () => {
         ctx.lineWidth = 0.8;
         ctx.stroke();
 
+        const scanLimitSq = mouseScanRadius * mouseScanRadius;
         particles.forEach((p) => {
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < mouseScanRadius) {
+          if (distSq < scanLimitSq) {
+            const dist = Math.sqrt(distSq) || 0.1;
             const alpha = (1 - dist / mouseScanRadius) * 0.28;
             ctx.beginPath();
             ctx.moveTo(mouse.x, mouse.y);
@@ -622,8 +656,6 @@ const LidarCanvas = () => {
           }
         });
       }
-
-      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
@@ -634,7 +666,7 @@ const LidarCanvas = () => {
       canvas.removeEventListener("mouseleave", onMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isLowPerformance]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
