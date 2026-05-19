@@ -78,7 +78,6 @@ const WhatIDo = () => {
           <div
             className="what-content what-noTouch what-content-active"
             ref={(el) => setRef(el, 0)}
-            style={{ width: '100%', height: '100%', minHeight: '100%', padding: '50px' }}
           >
             <div className="what-border1">
               <svg height="100%">
@@ -105,29 +104,29 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
             <div className={`what-arrow ${isScrolled ? "scrolled" : ""}`} onClick={handleArrowClick}></div>
 
-            <div className="what-content-in" ref={scrollRef} style={{ opacity: 1, paddingRight: '20px' }}>
-              <h3 style={{ fontSize: '42px', marginBottom: '10px' }}>ROBOTICS & AI</h3>
-              <h4 style={{ fontSize: '18px', opacity: 0.6, marginBottom: '20px' }}>Autonomous Systems & Embedded Software</h4>
-              <p style={{ fontSize: '16px', lineHeight: '24px', letterSpacing: '0.5px' }}>
+            <div className="what-content-in" ref={scrollRef}>
+              <h3>ROBOTICS & AI</h3>
+              <h4>Autonomous Systems & Embedded Software</h4>
+              <p>
                 Developing control systems, AI models, and embedded software for physical platforms. From SLAM and computer vision algorithms down to programming microcontrollers and designing mechanical components with SolidWorks, I bridge the gap between complex software logic and physical hardware arrays.
               </p>
-              <h5 style={{ fontSize: '14px', marginTop: '30px' }}>Skillset & tools</h5>
-              <div className="what-content-flex" style={{ gap: '10px', marginTop: '15px' }}>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>ROS2</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Nav2</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Gazebo</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>RViz</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>SLAM</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>OpenCV</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>TensorFlow</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Q-learning</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Python</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>C/C++</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Arduino</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Motor Control</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>Sensor Integration</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>SolidWorks</div>
-                <div className="what-tags" style={{ fontSize: '14px', padding: '5px 12px' }}>MATLAB</div>
+              <h5>Skillset & tools</h5>
+              <div className="what-content-flex">
+                <div className="what-tags">ROS2</div>
+                <div className="what-tags">Nav2</div>
+                <div className="what-tags">Gazebo</div>
+                <div className="what-tags">RViz</div>
+                <div className="what-tags">SLAM</div>
+                <div className="what-tags">OpenCV</div>
+                <div className="what-tags">TensorFlow</div>
+                <div className="what-tags">Q-learning</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">C/C++</div>
+                <div className="what-tags">Arduino</div>
+                <div className="what-tags">Motor Control</div>
+                <div className="what-tags">Sensor Integration</div>
+                <div className="what-tags">SolidWorks</div>
+                <div className="what-tags">MATLAB</div>
               </div>
             </div>
           </div>

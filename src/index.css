@@ -136,3 +136,381 @@ body {
     font-size: 40px;
   }
 }
+
+/* ── Performance HUD/Toast and Settings Panel ── */
+.perf-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 100000;
+  max-width: 420px;
+  width: calc(100vw - 48px);
+}
+
+.perf-toast-body {
+  background: rgba(10, 14, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(94, 234, 212, 0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.perf-toast-icon {
+  font-size: 24px;
+  background: rgba(94, 234, 212, 0.15);
+  color: var(--accentColor);
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(94, 234, 212, 0.2);
+}
+
+.perf-toast-content {
+  flex-grow: 1;
+}
+
+.perf-toast-content h4 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.perf-toast-content p {
+  margin: 0;
+  font-size: 12px;
+  color: #adacac;
+  line-height: 1.4;
+}
+
+.perf-toast-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.perf-toast-btn {
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.perf-toast-btn.primary {
+  background: var(--accentColor);
+  color: #0a0e17;
+}
+
+.perf-toast-btn.primary:hover {
+  background: #2dd4bf;
+  box-shadow: 0 0 8px rgba(94, 234, 212, 0.3);
+}
+
+.perf-toast-btn.secondary {
+  color: #adacac;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.perf-toast-btn.secondary:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Floating HUD controller for manual mode toggle */
+.perf-control-floating {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  background: rgba(10, 14, 23, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.perf-control-floating:hover {
+  border-color: rgba(94, 234, 212, 0.4);
+  box-shadow: 0 0 15px rgba(94, 234, 212, 0.15), 0 4px 20px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.perf-control-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #adacac;
+  transition: all 0.3s ease;
+}
+
+.perf-control-indicator.active {
+  background: var(--accentColor);
+  box-shadow: 0 0 8px var(--accentColor);
+}
+
+.perf-control-text {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #adacac;
+  transition: all 0.3s ease;
+}
+
+.perf-control-floating:hover .perf-control-text {
+  color: #fff;
+}
+
+.animate-in {
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── 2D Techstack Grid ── */
+.techstack-grid-2d {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 20px;
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  position: absolute;
+  top: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.tech-card-2d {
+  position: relative;
+  background: rgba(10, 14, 23, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.tech-card-2d:hover {
+  transform: translateY(-5px);
+  border-color: rgba(94, 234, 212, 0.4);
+  box-shadow: 0 0 20px rgba(94, 234, 212, 0.15), 0 8px 30px rgba(0, 0, 0, 0.6);
+  background: rgba(10, 14, 23, 0.85);
+}
+
+.tech-card-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: radial-gradient(circle at center, rgba(94, 234, 212, 0.15) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.tech-card-2d:hover .tech-card-glow {
+  opacity: 1;
+}
+
+.tech-card-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.tech-card-2d:hover .tech-card-img {
+  transform: scale(1.1);
+}
+
+.tech-card-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #adacac;
+  transition: color 0.3s ease;
+}
+
+.tech-card-2d:hover .tech-card-name {
+  color: var(--accentColor);
+}
+
+/* ── Character Model Fallback (Hologram circle/HUD) ── */
+.character-model-fallback {
+  height: 80%;
+  height: 80vh;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 100%;
+  left: 50%;
+  z-index: 0;
+  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hologram-hud-circle {
+  position: relative;
+  width: min(350px, 70vw);
+  height: min(350px, 70vw);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(94, 234, 212, 0.05) 0%, transparent 70%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(94, 234, 212, 0.1);
+  box-shadow: 0 0 30px rgba(94, 234, 212, 0.05), inset 0 0 30px rgba(94, 234, 212, 0.05);
+}
+
+.hud-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 8px rgba(94, 234, 212, 0.5));
+}
+
+.hud-spin-clockwise {
+  transform-origin: 50px 50px;
+  animation: hudSpin 20s linear infinite;
+}
+
+.hud-spin-counter {
+  transform-origin: 50px 50px;
+  animation: hudSpinRev 15s linear infinite;
+}
+
+@keyframes hudSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hudSpinRev {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.hologram-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(94, 234, 212, 0) 0%,
+    rgba(94, 234, 212, 0.08) 50%,
+    rgba(94, 234, 212, 0) 100%
+  );
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.hologram-status {
+  position: absolute;
+  bottom: -20px;
+  background: rgba(10, 14, 23, 0.8);
+  border: 1px solid rgba(94, 234, 212, 0.3);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--accentColor);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 10px rgba(94, 234, 212, 0.1);
+}
+
+.hologram-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accentColor);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px var(--accentColor); }
+}
+
+@media screen and (max-width: 1024px) {
+  .character-model-fallback {
+    height: 80vh;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .techstack-grid-2d {
+    grid-template-columns: repeat(4, 1fr);
+    top: 180px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .techstack-grid-2d {
+    grid-template-columns: repeat(2, 1fr);
+    top: 150px;
+    gap: 12px;
+  }
+  .tech-card-2d {
+    padding: 15px;
+  }
+  .tech-card-img {
+    width: 40px;
+    height: 40px;
+  }
+}
+

@@ -24,7 +24,7 @@ const imageUrls = [
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
+const sphereGeometry = new THREE.SphereGeometry(1, 15, 15);
 
 const spheres = [...Array(30)].map(() => ({
   scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
@@ -124,16 +124,34 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
   );
 }
 
+import { usePerformance } from "../context/PerformanceProvider";
+
+const techNames: Record<string, string> = {
+  "/images/react2.webp": "React",
+  "/images/next2.webp": "Next.js",
+  "/images/node2.webp": "Node.js",
+  "/images/express.webp": "Express",
+  "/images/mongo.webp": "MongoDB",
+  "/images/mysql.webp": "MySQL",
+  "/images/typescript.webp": "TypeScript",
+  "/images/javascript.webp": "JavaScript",
+};
+
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
+  const { isLowPerformance } = usePerformance();
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Scroll trigger behavior
     const handleScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
+      const workElem = document.getElementById("work");
+      if (workElem) {
+        const threshold = workElem.getBoundingClientRect().top;
+        setIsActive(scrollY > threshold);
+      }
     };
     document.querySelectorAll(".header a").forEach((elem) => {
       const element = elem as HTMLAnchorElement;
@@ -147,10 +165,24 @@ const TechStack = () => {
       });
     });
     window.addEventListener("scroll", handleScroll);
+
+    // Intersection Observer to stop R3F canvas rendering when off-screen
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { rootMargin: "150px" } // Load canvas slightly before coming into view
+    );
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
     };
   }, []);
+
   const materials = useMemo(() => {
     return textures.map(
       (texture) =>
@@ -166,47 +198,75 @@ const TechStack = () => {
     );
   }, []);
 
+  // Performance Mode fallback: High-speed 2D glassmorphic tech grid
+  if (isLowPerformance) {
+    return (
+      <div className="techstack" ref={sectionRef} id="techstack">
+        <h2> My Techstack</h2>
+        <div className="techstack-grid-2d">
+          {imageUrls.map((url, i) => {
+            const name = techNames[url] || "Tech";
+            return (
+              <div key={i} className="tech-card-2d">
+                <div className="tech-card-glow"></div>
+                <img src={url} alt={name} className="tech-card-img" />
+                <span className="tech-card-name">{name}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  const isDesktop = window.innerWidth > 1024;
+
   return (
-    <div className="techstack">
+    <div className="techstack" ref={sectionRef} id="techstack">
       <h2> My Techstack</h2>
 
-      <Canvas
-        shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
-        className="tech-canvas"
-      >
-        <ambientLight intensity={1} />
-        <spotLight
-          position={[20, 20, 25]}
-          penumbra={1}
-          angle={0.2}
-          color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
-        />
-        <directionalLight position={[0, 5, -4]} intensity={2} />
-        <Physics gravity={[0, 0, 0]}>
-          <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
-            <SphereGeo
-              key={i}
-              {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
-              isActive={isActive}
-            />
-          ))}
-        </Physics>
-        <Environment
-          files="/models/char_enviorment.hdr"
-          environmentIntensity={0.5}
-          environmentRotation={[0, 4, 2]}
-        />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
-        </EffectComposer>
-      </Canvas>
+      {isInView && (
+        <Canvas
+          shadows={isDesktop} // Disable shadows on lower-end viewport devices
+          gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
+          camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
+          onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
+          className="tech-canvas"
+        >
+          <ambientLight intensity={1} />
+          <spotLight
+            position={[20, 20, 25]}
+            penumbra={1}
+            angle={0.2}
+            color="white"
+            castShadow={isDesktop}
+            shadow-mapSize={isDesktop ? [512, 512] : [256, 256]}
+          />
+          <directionalLight position={[0, 5, -4]} intensity={2} />
+          <Physics gravity={[0, 0, 0]}>
+            <Pointer isActive={isActive} />
+            {spheres.map((props, i) => (
+              <SphereGeo
+                key={i}
+                {...props}
+                material={materials[Math.floor(Math.random() * materials.length)]}
+                isActive={isActive}
+              />
+            ))}
+          </Physics>
+          <Environment
+            files="/models/char_enviorment.hdr"
+            environmentIntensity={0.5}
+            environmentRotation={[0, 4, 2]}
+          />
+          {/* Only render screen-space ambient occlusion on desktop/high-end viewports */}
+          {isDesktop && (
+            <EffectComposer enableNormalPass={false}>
+              <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
+            </EffectComposer>
+          )}
+        </Canvas>
+      )}
     </div>
   );
 };
