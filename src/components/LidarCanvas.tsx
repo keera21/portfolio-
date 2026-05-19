@@ -69,7 +69,7 @@ const LidarCanvas = () => {
 
     const isDesktop = window.innerWidth > 1024;
     const roverGroup = new THREE.Group();
-    roverGroup.position.set(isDesktop ? 2.05 : 0, -0.45, 0);
+    roverGroup.position.set(isDesktop ? 2.45 : 0, -0.45, 0);
     scene.add(roverGroup);
 
     // Chassis Box
@@ -138,8 +138,8 @@ const LidarCanvas = () => {
     lidarScanner.position.y = 0.2;
     lidarBase.add(lidarScanner);
 
-    // Dynamic Scanning beam Fan shape
-    const beamGeo = new THREE.CylinderGeometry(0, 2.5, 0.8, 8, 1, true, 0, Math.PI * 0.25);
+    // Dynamic Scanning beam Fan shape (flat horizontal laser slice)
+    const beamGeo = new THREE.CylinderGeometry(0, 3.2, 0.05, 12, 1, true, 0, Math.PI * 0.35);
     const beamMaterial = new THREE.MeshBasicMaterial({
       color: 0x5eead4,
       wireframe: true,
@@ -148,8 +148,8 @@ const LidarCanvas = () => {
       side: THREE.DoubleSide
     });
     const scanningBeam = new THREE.Mesh(beamGeo, beamMaterial);
-    scanningBeam.position.set(0, 0, 1.25);
-    scanningBeam.rotation.x = Math.PI / 2;
+    scanningBeam.position.set(0, 0.1, 0);
+    // No vertical rotation around X so the laser sweeps horizontally
     lidarScanner.add(scanningBeam);
 
     // Front-mounted Robotic arm base
@@ -297,7 +297,7 @@ const LidarCanvas = () => {
       let targetY = 0;
 
       if (mouse.active) {
-        const cX = rect.left + width * (window.innerWidth > 1024 ? 0.72 : 0.5);
+        const cX = rect.left + width * (window.innerWidth > 1024 ? 0.77 : 0.5);
         const cY = rect.top + height / 2;
         targetX = (mouse.x - cX) / (width / 2);
         targetY = -(mouse.y - cY) / (height / 2);
@@ -509,7 +509,7 @@ const LidarCanvas = () => {
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      const centerX = width * (window.innerWidth > 1024 ? 0.72 : 0.5);
+      const centerX = width * (window.innerWidth > 1024 ? 0.77 : 0.5);
       const centerY = height / 2;
       const radarRadius = Math.min(width, height) * 0.38;
 

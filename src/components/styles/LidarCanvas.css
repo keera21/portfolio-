@@ -225,55 +225,55 @@
 @media screen and (min-width: 1025px) {
   .callout-lidar {
     top: 24%;
-    right: 23%;
+    right: 18%;
     flex-direction: row-reverse;
   }
   .callout-arm {
     top: 20%;
-    right: 6%;
+    right: 2%;
   }
   .callout-control {
     bottom: 24%;
-    right: 20%;
+    right: 15.5%;
   }
   .callout-sensor {
     bottom: 30%;
-    right: 36%;
+    right: 31%;
     flex-direction: row-reverse;
   }
 }
 
 @media screen and (min-width: 1300px) {
   .callout-lidar {
-    right: 23%;
+    right: 18%;
   }
   .callout-sensor {
-    right: 36%;
+    right: 31%;
   }
   .callout-arm {
-    right: 8%;
+    right: 4%;
   }
   .callout-control {
-    right: 21%;
+    right: 16.5%;
   }
 }
 
 @media screen and (min-width: 1600px) {
   .callout-lidar {
     top: 26%;
-    right: 23%;
+    right: 18%;
   }
   .callout-arm {
     top: 22%;
-    right: 11%;
+    right: 6%;
   }
   .callout-control {
     bottom: 26%;
-    right: 23%;
+    right: 18%;
   }
   .callout-sensor {
     bottom: 32%;
-    right: 36%;
+    right: 31%;
   }
 }
 
