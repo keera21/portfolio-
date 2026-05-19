@@ -642,44 +642,7 @@ const LidarCanvas = () => {
       {/* 3D WebGL Holographic Rover */}
       <div ref={webglRef} className="robot-3d-container"></div>
       
-      {/* 3D Telemetry Callouts Overlay */}
-      <div className="telemetry-overlay">
-        <div className="telemetry-callout callout-lidar">
-          <div className="callout-dot"></div>
-          <div className="callout-line"></div>
-          <div className="callout-content">
-            <span className="callout-label">LiDAR Sensor Array</span>
-            <span className="callout-value">3D Mapping & SLAM</span>
-          </div>
-        </div>
 
-        <div className="telemetry-callout callout-arm">
-          <div className="callout-dot"></div>
-          <div className="callout-line"></div>
-          <div className="callout-content">
-            <span className="callout-label">Multi-DOF Robotic Arm</span>
-            <span className="callout-value">Object Manipulation</span>
-          </div>
-        </div>
-
-        <div className="telemetry-callout callout-control">
-          <div className="callout-dot"></div>
-          <div className="callout-line"></div>
-          <div className="callout-content">
-            <span className="callout-label">AI Control Stack</span>
-            <span className="callout-value">Autonomous Navigation</span>
-          </div>
-        </div>
-
-        <div className="telemetry-callout callout-sensor">
-          <div className="callout-dot"></div>
-          <div className="callout-line"></div>
-          <div className="callout-content">
-            <span className="callout-label">AK Sensor Mode</span>
-            <span className="callout-value">Sarlation Telemetry</span>
-          </div>
-        </div>
-      </div>
 
       <div className="lidar-status">
         <span className="lidar-pulse-dot"></span>
