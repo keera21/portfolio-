@@ -225,6 +225,15 @@ export function setAllTimeline() {
         duration: 0.1,
       },
       0
+    )
+    .to(
+      ".lidar-container",
+      {
+        filter: "blur(15px)",
+        opacity: 0.12,
+        duration: 0.5,
+      },
+      0
     );
 
   if (window.innerWidth > 1024) {
