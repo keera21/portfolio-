@@ -227,17 +227,10 @@ export function setAllTimeline(_isLowPerformance?: boolean) {
       0
     )
     .to(
-      ".lidar-blur-overlay",
-      {
-        opacity: 1,
-        duration: 0.5,
-      },
-      0
-    )
-    .to(
       ".lidar-container",
       {
-        opacity: 0.85,
+        opacity: 0,
+        display: "none",
         duration: 0.5,
       },
       0
