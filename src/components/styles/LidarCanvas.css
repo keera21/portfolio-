@@ -284,5 +284,21 @@
   }
 }
 
+.lidar-blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4; /* Above canvases (z-index 2 and 3) but below telemetry overlay */
+  pointer-events: none;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(10, 14, 23, 0.75);
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.15s ease-out;
+}
+
 
 

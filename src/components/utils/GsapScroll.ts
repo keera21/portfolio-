@@ -177,12 +177,7 @@ export function setCharTimeline(
   }
 }
 
-export function setAllTimeline(isLowPerformance?: boolean) {
-  // If not passed, read directly from localStorage
-  const isEco = isLowPerformance !== undefined 
-    ? isLowPerformance 
-    : localStorage.getItem("performance_mode") === "true";
-
+export function setAllTimeline(_isLowPerformance?: boolean) {
   // Clean up any existing career timeline ScrollTrigger to prevent duplicates
   if (activeCareerTimeline) {
     activeCareerTimeline.scrollTrigger?.kill();
@@ -232,10 +227,17 @@ export function setAllTimeline(isLowPerformance?: boolean) {
       0
     )
     .to(
+      ".lidar-blur-overlay",
+      {
+        opacity: 1,
+        duration: 0.5,
+      },
+      0
+    )
+    .to(
       ".lidar-container",
       {
-        filter: isEco ? "none" : "blur(15px)",
-        opacity: 0.12,
+        opacity: 0.85,
         duration: 0.5,
       },
       0
