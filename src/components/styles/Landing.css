@@ -381,7 +381,7 @@
 
 @media screen and (min-width: 1025px) {
   .landing-content-left {
-    left: 8%;
+    left: 4%;
     right: auto;
     width: 44%;
     top: 50%;
@@ -391,7 +391,7 @@
 
 @media screen and (min-width: 1200px) {
   .landing-content-left {
-    left: 10%;
+    left: 5%;
     width: 42%;
   }
 }
