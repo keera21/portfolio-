@@ -1,0 +1,78 @@
+.lidar-container {
+  height: 80%;
+  height: 80vh;
+  position: absolute;
+  max-width: 1920px;
+  max-height: 1080px;
+  transform: translateX(-50%);
+  width: 100%;
+  left: 50%;
+  z-index: 0;
+  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto !important; /* Enable mouse hover interactions */
+}
+
+.lidar-canvas {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.lidar-status {
+  position: absolute;
+  bottom: -20px;
+  background: rgba(10, 14, 23, 0.8);
+  border: 1px solid rgba(94, 234, 212, 0.35);
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--accentColor);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 12px rgba(94, 234, 212, 0.15);
+  z-index: 5;
+}
+
+.lidar-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accentColor);
+  animation: lidarPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes lidarPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 8px var(--accentColor);
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .lidar-container {
+    height: 100vh;
+    bottom: 0;
+    z-index: 0; /* Keep behind landing texts but accessible for hovers */
+    position: fixed;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .lidar-container {
+    height: 80vh;
+  }
+}

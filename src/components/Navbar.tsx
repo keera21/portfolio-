@@ -3,14 +3,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { usePerformance } from "../context/PerformanceProvider";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 export let smoother: ScrollSmoother;
 
 const Navbar = () => {
-  const { isLowPerformance, setLowPerformance } = usePerformance();
 
   useEffect(() => {
     smoother = ScrollSmoother.create({
@@ -72,17 +70,6 @@ const Navbar = () => {
             </a>
           </li>
         </ul>
-      </div>
-
-      <div
-        className="perf-control-floating"
-        onClick={() => setLowPerformance(!isLowPerformance)}
-        title={isLowPerformance ? "Switch to Visual 3D Mode" : "Switch to Smooth 2D Mode"}
-      >
-        <span className={`perf-control-indicator ${isLowPerformance ? "" : "active"}`}></span>
-        <span className="perf-control-text">
-          {isLowPerformance ? "Smooth Mode" : "Visual Mode"}
-        </span>
       </div>
 
       <div className="landing-circle1"></div>

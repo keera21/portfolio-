@@ -10,11 +10,9 @@ import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText from "./utils/splitText";
-import { usePerformance } from "../context/PerformanceProvider";
 import { setCharTimeline, setAllTimeline } from "./utils/GsapScroll";
 
 const MainContainer = ({ children }: PropsWithChildren) => {
-  const { isLowPerformance } = usePerformance();
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
     window.innerWidth > 1024
   );
@@ -23,6 +21,8 @@ const MainContainer = ({ children }: PropsWithChildren) => {
     const resizeHandler = () => {
       setSplitText();
       setIsDesktopView(window.innerWidth > 1024);
+      setCharTimeline(null);
+      setAllTimeline();
     };
     resizeHandler();
     window.addEventListener("resize", resizeHandler);
@@ -30,15 +30,6 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       window.removeEventListener("resize", resizeHandler);
     };
   }, [isDesktopView]);
-
-  useEffect(() => {
-    // If in Performance Mode, initialize scroll timelines immediately
-    // because the 3D character compiling thread is bypassed.
-    if (isLowPerformance) {
-      setCharTimeline(null);
-      setAllTimeline();
-    }
-  }, [isLowPerformance]);
 
   return (
     <div className="container-main">
