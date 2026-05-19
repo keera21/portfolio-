@@ -11,6 +11,7 @@ const LidarCanvas = () => {
   const webglRef = useRef<HTMLDivElement | null>(null);
   const mouseRef = useRef({ x: -1000, y: -1000, active: false });
   const isVisibleRef = useRef(true);
+  const isScrollingRef = useRef(false);
   const { setLoading } = useLoading();
   const { isLowPerformance } = usePerformance();
 
@@ -28,6 +29,25 @@ const LidarCanvas = () => {
 
     observer.observe(container);
     return () => observer.disconnect();
+  }, []);
+
+  // Passive scroll listener to freeze canvas renders during active scrolling in Eco Mode
+  useEffect(() => {
+    let scrollTimeout: any = null;
+
+    const handleScroll = () => {
+      isScrollingRef.current = true;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 120); // Quick resume after scroll completes
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+    };
   }, []);
 
   // Fast loading sequence
@@ -303,7 +323,7 @@ const LidarCanvas = () => {
     // Render and animation loop
     const animate3D = () => {
       animationFrameId = requestAnimationFrame(animate3D);
-      if (!isVisibleRef.current) return;
+      if (!isVisibleRef.current || (isLowPerformance && isScrollingRef.current)) return;
       time += 0.01;
 
       // Rotate ground circles in opposing directions
@@ -538,7 +558,7 @@ const LidarCanvas = () => {
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      if (!isVisibleRef.current) return;
+      if (!isVisibleRef.current || (isLowPerformance && isScrollingRef.current)) return;
       ctx.clearRect(0, 0, width, height);
 
       const centerX = width * (window.innerWidth > 1024 ? 0.77 : 0.5);
@@ -670,11 +690,11 @@ const LidarCanvas = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setAllTimeline();
+      setAllTimeline(isLowPerformance);
       ScrollTrigger.refresh();
     }, 100);
     return () => clearTimeout(timer);
-  }, []);
+  }, [isLowPerformance]);
 
   return (
     <div className="lidar-container character-model">
