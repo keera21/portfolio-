@@ -188,8 +188,8 @@ export function setAllTimeline() {
   const careerTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".career-section",
-      start: "top 30%",
-      end: "100% center",
+      start: "top 95%",
+      end: "top 35%",
       scrub: true,
       invalidateOnRefresh: true,
     },
