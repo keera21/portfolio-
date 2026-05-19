@@ -7,7 +7,6 @@ import Cursor from "./Cursor";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
-import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText from "./utils/splitText";
 import { setCharTimeline, setAllTimeline } from "./utils/GsapScroll";
@@ -42,7 +41,6 @@ const MainContainer = ({ children }: PropsWithChildren) => {
           <div className="container-main">
             <Landing>{!isDesktopView && children}</Landing>
             <About />
-            <WhatIDo />
             <Work />
             <Career />
             <Certifications />

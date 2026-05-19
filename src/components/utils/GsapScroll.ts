@@ -68,7 +68,7 @@ export function setCharTimeline(
 
   const tl3 = gsap.timeline({
     scrollTrigger: {
-      trigger: ".whatIDO",
+      trigger: ".work-section",
       start: "top top",
       end: "bottom top",
       scrub: true,
@@ -127,12 +127,6 @@ export function setCharTimeline(
         0
       )
       .fromTo(
-        ".what-box-in",
-        { display: "none" },
-        { display: "flex", duration: 0.1, delay: 6 },
-        0
-      )
-      .fromTo(
         ".character-rim",
         { opacity: 1, scaleX: 1.4 },
         { opacity: 0, scale: 0, y: "-70%", duration: 5, delay: 2 },
@@ -145,8 +139,7 @@ export function setCharTimeline(
         { y: "0%" },
         { y: "-100%", duration: 4, ease: "none", delay: 1 },
         0
-      )
-      .fromTo(".whatIDO", { y: 0 }, { y: "15%", duration: 2 }, 0);
+      );
 
     // 2. 3D specific animations that run only if character and camera are present
     if (hasChar && character && camera) {
@@ -181,15 +174,6 @@ export function setCharTimeline(
     }
   } else {
     // Under 1024px: Run the HTML timeline ALWAYS
-    const tM2 = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".what-box-in",
-        start: "top 70%",
-        end: "bottom top",
-      },
-    });
-    activeTlElse = tM2;
-    tM2.to(".what-box-in", { display: "flex", duration: 0.1, delay: 0 }, 0);
   }
 }
 
