@@ -77,4 +77,206 @@
   }
 }
 
+.robot-3d-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.robot-3d-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.telemetry-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.telemetry-callout {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+  opacity: 0;
+  animation: telemetryFadeIn 0.8s forwards;
+  animation-delay: 1.2s;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+}
+
+@keyframes telemetryFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.telemetry-callout:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 0 10px rgba(94, 234, 212, 0.35));
+}
+
+.callout-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #5eead4;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.callout-dot::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #5eead4;
+  border-radius: 50%;
+  left: -5px;
+  top: -5px;
+  animation: sonar 2.2s infinite ease-out;
+}
+
+@keyframes sonar {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.callout-line {
+  height: 1px;
+  background: rgba(94, 234, 212, 0.35);
+  width: 45px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.callout-line::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #5eead4;
+  border-radius: 50%;
+  top: -1.5px;
+}
+
+.telemetry-callout:not([style*="flex-direction: row-reverse"]) .callout-line::after {
+  right: 0;
+}
+
+.telemetry-callout[style*="flex-direction: row-reverse"] .callout-line::after {
+  left: 0;
+}
+
+.callout-content {
+  background: rgba(8, 12, 22, 0.78);
+  border: 1px solid rgba(94, 234, 212, 0.22);
+  border-radius: 6px;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  min-width: 165px;
+}
+
+.callout-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accentColor);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.callout-value {
+  font-family: "Inter", sans-serif;
+  font-size: 9px;
+  color: #94a3b8;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* Callouts Position layout for large views */
+@media screen and (min-width: 1025px) {
+  .callout-lidar {
+    top: 24%;
+    right: 42%;
+    flex-direction: row-reverse;
+  }
+  .callout-arm {
+    top: 20%;
+    right: 5%;
+  }
+  .callout-control {
+    bottom: 24%;
+    right: 8%;
+  }
+  .callout-sensor {
+    bottom: 30%;
+    right: 44%;
+    flex-direction: row-reverse;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .callout-lidar {
+    right: 39%;
+  }
+  .callout-sensor {
+    right: 41%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .callout-lidar {
+    top: 26%;
+    right: 36%;
+  }
+  .callout-arm {
+    top: 22%;
+    right: 8%;
+  }
+  .callout-control {
+    bottom: 26%;
+    right: 12%;
+  }
+  .callout-sensor {
+    bottom: 32%;
+    right: 38%;
+  }
+}
+
+/* Hide callout telemetry text circles on smaller/mobile displays to avoid UI collision */
+@media screen and (max-width: 1024px) {
+  .telemetry-overlay {
+    display: none;
+  }
+}
+
+
 
