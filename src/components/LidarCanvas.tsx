@@ -543,46 +543,9 @@ const LidarCanvas = () => {
 
       const centerX = width * (window.innerWidth > 1024 ? 0.77 : 0.5);
       const centerY = height / 2;
-      const radarRadius = Math.min(width, height) * 0.38;
 
-      // Draw Holographic Circular Spanning Sectors (Radar Grids)
-      ctx.strokeStyle = "rgba(94, 234, 212, 0.04)";
-      ctx.lineWidth = 1;
-
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radarRadius, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radarRadius * 0.65, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radarRadius * 0.3, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // Axis lines with dashes
-      ctx.strokeStyle = "rgba(94, 234, 212, 0.02)";
-      ctx.setLineDash([5, 10]);
-      ctx.beginPath();
-      ctx.moveTo(centerX - radarRadius * 1.1, centerY);
-      ctx.lineTo(centerX + radarRadius * 1.1, centerY);
-      ctx.moveTo(centerX, centerY - radarRadius * 1.1);
-      ctx.lineTo(centerX, centerY + radarRadius * 1.1);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Animated LiDAR radar scanning sweep line
+      // Animated LiDAR radar scanning sweep angle update (keeps particles organically pulsing)
       sweepAngle += 0.004;
-      const sweepX = centerX + Math.cos(sweepAngle) * radarRadius;
-      const sweepY = centerY + Math.sin(sweepAngle) * radarRadius;
-
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.lineTo(sweepX, sweepY);
-      ctx.strokeStyle = "rgba(94, 234, 212, 0.07)";
-      ctx.lineWidth = 1.2;
-      ctx.stroke();
 
       // Update & Render SLAM Nodes
       particles.forEach((p) => {
