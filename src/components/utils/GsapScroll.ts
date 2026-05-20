@@ -192,6 +192,16 @@ export function setAllTimeline(_isLowPerformance?: boolean) {
       end: "top 35%",
       scrub: true,
       invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const container = document.querySelector(".lidar-container") as HTMLElement;
+        if (container) {
+          if (self.progress === 1) {
+            container.style.display = "none";
+          } else {
+            container.style.display = "flex";
+          }
+        }
+      },
     },
   });
   activeCareerTimeline = careerTimeline;
@@ -230,7 +240,6 @@ export function setAllTimeline(_isLowPerformance?: boolean) {
       ".lidar-container",
       {
         opacity: 0,
-        display: "none",
         duration: 0.5,
       },
       0
