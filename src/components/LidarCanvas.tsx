@@ -677,7 +677,7 @@ const LidarCanvas = () => {
   }, [isLowPerformance]);
 
   return (
-    <div className="lidar-container character-model">
+    <div className="lidar-container">
       <div className="character-rim"></div>
       <div className="lidar-blur-overlay"></div>
       <canvas ref={canvasRef} className="lidar-canvas" />
