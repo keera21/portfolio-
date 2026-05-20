@@ -190,7 +190,6 @@ const Scene = () => {
     return (
       <div className="character-container fallback">
         <div className="character-model-fallback">
-          <div className="character-rim fallback-active" style={{ opacity: 1 }}></div>
           <div className="hologram-hud-circle">
             <svg viewBox="0 0 100 100" className="hud-svg">
               <circle cx="50" cy="50" r="45" stroke="#5eead4" strokeWidth="0.5" strokeDasharray="3, 3" fill="none" className="hud-spin-clockwise" />
@@ -222,7 +221,6 @@ const Scene = () => {
     <>
       <div className="character-container">
         <div className="character-model" ref={canvasDiv}>
-          <div className="character-rim"></div>
           <div className="character-hover" ref={hoverDivRef}></div>
         </div>
       </div>

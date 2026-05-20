@@ -125,12 +125,6 @@ export function setCharTimeline(
         { pointerEvents: "inherit" },
         { pointerEvents: "none", x: "-12%", delay: 2, duration: 5 },
         0
-      )
-      .fromTo(
-        ".character-rim",
-        { opacity: 1, scaleX: 1.4 },
-        { opacity: 0, scale: 0, y: "-70%", duration: 5, delay: 2 },
-        0.3
       );
 
     tl3

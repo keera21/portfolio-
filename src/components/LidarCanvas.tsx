@@ -678,7 +678,6 @@ const LidarCanvas = () => {
 
   return (
     <div className="lidar-container">
-      <div className="character-rim"></div>
       <div className="lidar-blur-overlay"></div>
       <canvas ref={canvasRef} className="lidar-canvas" />
       
