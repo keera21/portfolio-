@@ -9,6 +9,7 @@ let activeTl3: gsap.core.Timeline | null = null;
 let activeTlElse: gsap.core.Timeline | null = null;
 let activeTlEmissive: gsap.core.Timeline | null = null;
 let activeCareerTimeline: gsap.core.Timeline | null = null;
+let activeLidarTimeline: gsap.core.Timeline | null = null;
 
 export function setCharTimeline(
   character: THREE.Object3D<THREE.Object3DEventMap> | null,
@@ -172,12 +173,40 @@ export function setCharTimeline(
 }
 
 export function setAllTimeline(_isLowPerformance?: boolean) {
-  // Clean up any existing career timeline ScrollTrigger to prevent duplicates
+  // Clean up any existing career and lidar timelines/ScrollTriggers to prevent duplicates
   if (activeCareerTimeline) {
     activeCareerTimeline.scrollTrigger?.kill();
     activeCareerTimeline.kill();
     activeCareerTimeline = null;
   }
+  if (activeLidarTimeline) {
+    activeLidarTimeline.scrollTrigger?.kill();
+    activeLidarTimeline.kill();
+    activeLidarTimeline = null;
+  }
+
+  // Instantly hide the background LiDAR container when entering career section
+  const lidarTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".career-section",
+      start: "top 100%",
+      onEnter: () => {
+        const container = document.querySelector(".lidar-container") as HTMLElement;
+        if (container) {
+          container.style.display = "none";
+          container.style.opacity = "0";
+        }
+      },
+      onLeaveBack: () => {
+        const container = document.querySelector(".lidar-container") as HTMLElement;
+        if (container) {
+          container.style.display = "flex";
+          container.style.opacity = "1";
+        }
+      },
+    },
+  });
+  activeLidarTimeline = lidarTimeline;
 
   const careerTimeline = gsap.timeline({
     scrollTrigger: {
@@ -186,16 +215,6 @@ export function setAllTimeline(_isLowPerformance?: boolean) {
       end: "top 35%",
       scrub: true,
       invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const container = document.querySelector(".lidar-container") as HTMLElement;
-        if (container) {
-          if (self.progress === 1) {
-            container.style.display = "none";
-          } else {
-            container.style.display = "flex";
-          }
-        }
-      },
     },
   });
   activeCareerTimeline = careerTimeline;
@@ -227,14 +246,6 @@ export function setAllTimeline(_isLowPerformance?: boolean) {
         animationIterationCount: "1",
         delay: 0.3,
         duration: 0.1,
-      },
-      0
-    )
-    .to(
-      ".lidar-container",
-      {
-        opacity: 0,
-        duration: 0.5,
       },
       0
     );
