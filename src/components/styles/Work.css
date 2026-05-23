@@ -341,3 +341,53 @@
     max-height: 250px;
   }
 }
+
+/* ── View More LinkedIn Button ── */
+.view-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.view-more-linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #eae5ec;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.view-more-linkedin-btn:hover {
+  background: rgba(94, 234, 212, 0.1);
+  border-color: var(--accentColor);
+  color: var(--accentColor);
+  box-shadow: 0 0 25px rgba(94, 234, 212, 0.2);
+  transform: translateY(-2px);
+}
+
+.view-more-linkedin-btn svg {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.view-more-linkedin-btn:hover svg {
+  transform: translateX(4px);
+}
+
+@media only screen and (max-width: 900px) {
+  .view-more-container {
+    margin-top: 25px;
+  }
+  .view-more-linkedin-btn {
+    padding: 10px 22px;
+    font-size: 14px;
+  }
+}

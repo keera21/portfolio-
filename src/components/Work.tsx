@@ -28,6 +28,20 @@ const projects: Project[] = [
     image: "/images/rover.png",
   },
   {
+    title: "4DOF Robotic Arm",
+    category: "Embedded & Control Systems",
+    tools: "Arduino UNO · PCA9685 PWM Servo Driver · SG90 Servo Calibration · LM2596 Buck Converter · Serial Communication · Power Management",
+    details: [
+      "Designed and developed a fully functional 4DOF robotic arm with complete hardware and software integration using an Arduino UNO and PCA9685 PWM servo driver.",
+      "Implemented smooth and precise servo motion control, including SG90 servo calibration, safety limits, movement optimization, and custom serial command architecture.",
+      "Integrated efficient power management using an LM2596 buck converter to ensure stable operation and reliable performance.",
+      "Solved real-world engineering challenges such as servo jitter, wiring faults, power instability, and motion calibration through iterative testing and debugging.",
+      "Enabled independent control of base rotation, shoulder joint, elbow joint, and gripper mechanism for accurate robotic manipulation.",
+      "Strengthened practical expertise in embedded systems, robotics hardware integration, PWM communication, power electronics, and system optimization."
+    ],
+    image: "/images/robotic_arm.png",
+  },
+  {
     title: "Autonomous Warehouse Delivery Robot",
     category: "ROS2 & Nav2 Simulation",
     tools: "ROS2, Nav2, EKF, Python, URDF",
@@ -238,6 +252,20 @@ const Work = () => {
                 data-cursor="disable"
               />
             ))}
+          </div>
+
+          {/* Global LinkedIn Link */}
+          <div className="view-more-container">
+            <a 
+              href="https://www.linkedin.com/in/bashaar-ahmed-37573ab2/details/projects/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="view-more-linkedin-btn"
+              data-cursor="disable"
+            >
+              <span>View More Projects on LinkedIn</span>
+              <MdArrowForward />
+            </a>
           </div>
         </div>
       </div>
