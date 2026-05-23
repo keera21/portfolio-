@@ -18,7 +18,7 @@ const Contact = () => {
             <p style={{ lineHeight: '1.6' }}>
               Mehran University of Engineering and Technology, Jamshoro, Pakistan<br />
               Bachelor of Engineering, Mechatronics Engineering<br />
-              &bull; GPA: 3.68/4 (6th Semester)
+              &bull; GPA: 3.89/4
             </p>
           </div>
           <div className="contact-box">
